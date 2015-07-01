@@ -4,11 +4,10 @@ require_relative "display"
 require_relative "piece"
 
 class Board
-  attr_reader :grid, :display
+  attr_reader :grid
 
   def initialize
     @grid = Array.new(8){ Array.new(8){ EmptySquare.new }}
-    @display = Display.new(self)
     board_setup
   end
 
@@ -33,25 +32,21 @@ class Board
     grid[row][col] = value
   end
 
-  def render
-    @display.render
-  end
-
   def on_board?(pos)
     (0..7).include?(pos[0]) && (0..7).include?(pos[1])
   end
 
   def occupied?(pos)
-    self[pos].empty?
+    !self[pos].empty?
   end
 
   def piece_at(pos)
     self[pos]
   end
 
-end
+  def move_piece(pos, target)
+    self[target] = self[pos]
+    self[pos] = EmptySquare.new
+  end
 
-if __FILE__ == $PROGRAM_NAME
-  board = Board.new
-  board.display.get_cursor
 end
