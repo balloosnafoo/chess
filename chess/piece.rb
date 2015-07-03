@@ -176,12 +176,14 @@ class Pawn < Piece
 
   def moves
     moves_arr = []
+    p multiplier = color == :white ? 1 : -1
     multiplier = color == :white ? 1 : -1
     if @moved
       moves_arr << [pos[0] + (1 * multiplier), pos[1]]
     else
       moves_arr << [pos[0] + (1 * multiplier), pos[1]]
       moves_arr << [pos[0] + (2 * multiplier), pos[1]]
+      @moved = true
     end
     x = pos[0] + (1 * multiplier)
     y1 = pos[1] - 1

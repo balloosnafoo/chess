@@ -19,6 +19,7 @@ class HumanPlayer < Player
       input = $stdin.getch
       @game.update_cursor(input)
       chosen = true if input == "\r"
+      exit if input == "p"
     end
   end
 
